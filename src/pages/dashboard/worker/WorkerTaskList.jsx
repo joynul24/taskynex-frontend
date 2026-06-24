@@ -10,7 +10,7 @@ export default function WorkerTaskList() {
 
     useEffect(() => {
         axios
-            .get("/tasks")
+            .get("https://taskynex-backend.vercel.app/tasks")
             .then(res => {
                 if (Array.isArray(res.data)) {
                     setTasks(res.data);
@@ -111,7 +111,7 @@ export default function WorkerTaskList() {
 
                                 <Link
                                     to={`/dashboard/task-details/${task._id}`}
-                                    className="btn btn-primary w-full mt-4 block text-center"
+                                    className="btn btn-primary w-full mt-4"
                                 >
                                     View Details
                                 </Link>

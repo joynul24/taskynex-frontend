@@ -15,7 +15,7 @@ export default function TaskDetails() {
 
     useEffect(() => {
 
-        axios.get(`/tasks/${id}`)
+        axios.get(`https://taskynex-backend.vercel.app/tasks/${id}`)
             .then(res => {
                 setTask(res.data);
             });
