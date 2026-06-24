@@ -5,7 +5,7 @@ A full-stack MERN-based micro-task earning platform where users complete small t
 ---
 
 ## 🌐 Live Demo
-Live: https://micro-task-website.vercel.app
+Live: https://micro-task-website.web.app/
 
 ---
 
@@ -217,7 +217,7 @@ node index.js
 ## 👨‍💻 Developer
 Built with ❤️ by Joynul Abedin  
 
-GitHub: https://github.com/joynul24/Micro-Task-Website 
+GitHub: https://github.com/joynul24/taskynex-frontend 
 Portfolio: https://devjoynul26.vercel.app 
 
 ---

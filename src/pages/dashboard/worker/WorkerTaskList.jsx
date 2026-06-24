@@ -5,27 +5,33 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function WorkerTaskList() {
-
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-
         axios
             .get("/tasks")
             .then(res => {
-                setTasks(res.data);
+                if (Array.isArray(res.data)) {
+                    setTasks(res.data);
+                } else if (res.data && Array.isArray(res.data.tasks)) {
+                    setTasks(res.data.tasks);
+                } else {
+                    setTasks([]);
+                }
                 setLoading(false);
             })
             .catch(err => {
                 console.log(err);
+                setTasks([]);
                 setLoading(false);
             });
-
     }, []);
 
+    const safeTasks = Array.isArray(tasks) ? tasks : [];
+
     return (
-        <div className="max-w-7xl text-black mx-auto flex flex-col gap-6">
+        <div className="max-w-7xl text-slate-800 dark:text-slate-100 mx-auto flex flex-col gap-6">
 
             <Helmet>
                 <title>Taskynex | Task List</title>
@@ -34,13 +40,13 @@ export default function WorkerTaskList() {
             <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white dark:bg-slate-900 p-6 rounded-3xl border"
+                className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800"
             >
                 <h1 className="text-3xl text-slate-700 dark:text-slate-300 font-black">
                     Available Tasks
                 </h1>
 
-                <p className="text-gray-500 mt-2">
+                <p className="text-gray-500 dark:text-slate-400 mt-2">
                     Find and complete tasks to earn coins.
                 </p>
             </motion.div>
@@ -48,7 +54,7 @@ export default function WorkerTaskList() {
             {
                 loading ?
 
-                    <div className="text-center py-20">
+                    <div className="text-center py-20 text-slate-500 dark:text-slate-400">
                         Loading...
                     </div>
 
@@ -56,7 +62,7 @@ export default function WorkerTaskList() {
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                        {(tasks || []).map(task => (
+                        {safeTasks.map(task => (
 
                             <div
                                 key={task._id}
@@ -66,10 +72,10 @@ export default function WorkerTaskList() {
                                 <img
                                     src={task.task_image_url}
                                     alt=""
-                                    className="w-full h-48 object-cover rounded-lg"
+                                    className="w-full h-48 object-cover rounded-lg border border-slate-100 dark:border-slate-800"
                                 />
 
-                                <h2 className="font-bold text-xl mt-4 text-slate-900 dark:text-white">
+                                <h2 className="font-bold text-xl mt-4 text-slate-900 dark:text-white truncate">
                                     {task.task_title}
                                 </h2>
 
@@ -105,7 +111,7 @@ export default function WorkerTaskList() {
 
                                 <Link
                                     to={`/dashboard/task-details/${task._id}`}
-                                    className="btn btn-primary w-full mt-4"
+                                    className="btn btn-primary w-full mt-4 block text-center"
                                 >
                                     View Details
                                 </Link>
@@ -115,7 +121,6 @@ export default function WorkerTaskList() {
                         ))}
 
                     </div>
-
             }
 
         </div>
