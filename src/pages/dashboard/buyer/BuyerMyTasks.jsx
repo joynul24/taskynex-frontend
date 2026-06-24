@@ -129,152 +129,158 @@ export default function BuyerMyTasks() {
       </motion.div>
 
       {/* TABLE */}
-  <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
 
-  {loading ? (
-    <p className="text-gray-400">Loading...</p>
-  ) : tasks.length === 0 ? (
-    <p className="text-gray-400">No tasks found</p>
-  ) : (
-    <>
-      {/* ================= DESKTOP TABLE ================= */}
-      <div className="hidden lg:block overflow-x-auto">
-        <table className="w-full text-sm">
+        {loading ? (
+          <p className="text-gray-400">Loading...</p>
+        ) : tasks.length === 0 ? (
+          <p className="text-gray-400">No tasks found</p>
+        ) : (
+          <>
+            {/* ================= DESKTOP TABLE ================= */}
+            <div className="hidden lg:block overflow-x-auto">
+              <table className="w-full text-sm">
 
-          {/* HEADER */}
-          <thead>
-            <tr className="bg-indigo-50 dark:bg-slate-800 text-indigo-700 dark:text-indigo-300">
-              <th className="p-3 text-left whitespace-nowrap">Image</th>
-              <th className="p-3 text-left whitespace-nowrap">Title</th>
-              <th className="p-3 text-center whitespace-nowrap">Workers</th>
-              <th className="p-3 text-center whitespace-nowrap">Pay</th>
-              <th className="p-3 text-center whitespace-nowrap">Total</th>
-              <th className="p-3 text-center whitespace-nowrap">Date</th>
-              <th className="p-3 text-center whitespace-nowrap">Action</th>
-            </tr>
-          </thead>
+                {/* HEADER */}
+                <thead>
+                  <tr className="bg-indigo-50 dark:bg-slate-800 text-indigo-700 dark:text-indigo-300">
+                    <th className="p-3 text-left whitespace-nowrap">Image</th>
+                    <th className="p-3 text-left whitespace-nowrap">Title</th>
+                    <th className="p-3 text-center whitespace-nowrap">Workers</th>
+                    <th className="p-3 text-center whitespace-nowrap">Pay</th>
+                    <th className="p-3 text-center whitespace-nowrap">Total</th>
+                    <th className="p-3 text-center whitespace-nowrap">Date</th>
+                    <th className="p-3 text-center whitespace-nowrap">Action</th>
+                  </tr>
+                </thead>
 
-          {/* BODY */}
-          <tbody>
-            {tasks.map((task) => (
-              <tr
-                key={task._id}
-                className="border-b border-slate-200 dark:border-slate-800 hover:bg-indigo-50 dark:hover:bg-slate-800 transition"
-              >
-                <td className="p-3">
-                  <img
-                    src={task.task_image_url}
-                    alt="task"
-                    className="w-14 h-14 object-cover rounded-xl border border-slate-200 dark:border-slate-700"
-                  />
-                </td>
+                {/* BODY */}
+                <tbody>
+                  {(tasks || []).map((task) => (
+                    <tr
+                      key={task._id}
+                      className="border-b border-slate-200 dark:border-slate-800 hover:bg-indigo-50 dark:hover:bg-slate-800/50 transition"
+                    >
+                      <td className="p-3">
+                        <img
+                          src={task.task_image_url}
+                          alt="task"
+                          className="w-14 h-14 object-cover rounded-xl border border-slate-200 dark:border-slate-700"
+                        />
+                      </td>
 
-                <td className="p-3 font-semibold text-slate-800 dark:text-white max-w-[220px] truncate">
-                  {task.title}
-                </td>
+                      <td className="p-3 font-semibold text-slate-800 dark:text-white max-w-[220px] truncate">
+                        {task.title}
+                      </td>
 
-                <td className="text-center">
-                  <span className="px-2 py-1 rounded-full bg-indigo-100 text-indigo-700 text-xs font-medium">
-                    {task.required_workers}
-                  </span>
-                </td>
+                      <td className="text-center">
+                        {/* ডার্ক মোডে ব্যাজের ব্যাকগ্রাউন্ড ও টেক্সট কালার ফিক্স করা হয়েছে */}
+                        <span className="px-2 py-1 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 text-xs font-medium">
+                          {task.required_workers}
+                        </span>
+                      </td>
 
-                <td className="text-center text-slate-600 dark:text-slate-300">
-                  ${task.payable_amount}
-                </td>
+                      <td className="text-center text-slate-600 dark:text-slate-300">
+                        ${task.payable_amount}
+                      </td>
 
-                <td className="text-center font-bold text-indigo-600">
-                  {task.required_workers * task.payable_amount}
-                </td>
+                      {/* ডার্ক মোডে টোটাল অ্যামাউন্টের কালার ফিক্স করা হয়েছে */}
+                      <td className="text-center font-bold text-indigo-600 dark:text-indigo-400">
+                        {task.required_workers * task.payable_amount}
+                      </td>
 
-                <td className="text-center text-slate-500">
-                  {task.completion_date}
-                </td>
+                      {/* ডার্ক মোডে ডেটের কালার ফিক্স করা হয়েছে */}
+                      <td className="text-center text-slate-500 dark:text-slate-400">
+                        {task.completion_date}
+                      </td>
 
-                <td className="p-3 flex justify-center gap-2">
-                  <button
-                    onClick={() => handleEdit(task)}
-                    className="px-3 py-1 text-xs rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white transition cursor-pointer"
-                  >
-                    Update
-                  </button>
+                      <td className="p-3 flex justify-center gap-2">
+                        <button
+                          onClick={() => handleEdit(task)}
+                          className="px-3 py-1 text-xs rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white transition cursor-pointer"
+                        >
+                          Update
+                        </button>
 
-                  <button
-                    onClick={() => handleDelete(task._id)}
-                    className="px-3 py-1 text-xs rounded-lg bg-red-500 hover:bg-red-600 text-white transition cursor-pointer"
-                  >
-                    Delete
-                  </button>
-                </td>
+                        <button
+                          onClick={() => handleDelete(task._id)}
+                          className="px-3 py-1 text-xs rounded-lg bg-red-500 hover:bg-red-600 text-white transition cursor-pointer"
+                        >
+                          Delete
+                        </button>
+                      </td>
 
-              </tr>
-            ))}
-          </tbody>
+                    </tr>
+                  ))}
+                </tbody>
 
-        </table>
+              </table>
+            </div>
+
+            {/* ================= MOBILE CARD VIEW ================= */}
+            <div className="lg:hidden space-y-4 mt-4">
+              {(tasks || []).map((task) => (
+                <div
+                  key={task._id}
+                  className="border border-slate-200 dark:border-slate-800 rounded-xl p-4 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition"
+                >
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={task.task_image_url}
+                      alt="task"
+                      className="w-12 h-12 object-cover rounded-lg border border-slate-100 dark:border-slate-800"
+                    />
+
+                    <div className="flex-1">
+                      <h2 className="font-semibold text-slate-800 dark:text-white truncate">
+                        {task.title}
+                      </h2>
+
+                      {/* ডার্ক মোডে ডেটের ধূসর কালার স্পষ্ট করা হয়েছে */}
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                        Date: {task.completion_date}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between mt-3 text-sm">
+                    {/* ডার্ক মোডে Workers টেক্সটের কালার ফিক্স করা হয়েছে */}
+                    <span className="text-indigo-600 dark:text-indigo-400 font-medium">
+                      Workers: {task.required_workers}
+                    </span>
+
+                    <span className="text-slate-600 dark:text-slate-300">
+                      Pay: ${task.payable_amount}
+                    </span>
+                  </div>
+
+                  {/* ডার্ক মোডে Total টেক্সটের কালার ফিক্স করা হয়েছে */}
+                  <div className="mt-2 font-bold text-indigo-600 dark:text-indigo-400">
+                    Total: {task.required_workers * task.payable_amount}
+                  </div>
+
+                  <div className="flex gap-2 mt-3">
+                    <button
+                      onClick={() => handleEdit(task)}
+                      className="flex-1 px-3 py-1 text-xs rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white transition cursor-pointer"
+                    >
+                      Update
+                    </button>
+
+                    <button
+                      onClick={() => handleDelete(task._id)}
+                      className="flex-1 px-3 py-1 text-xs rounded-lg bg-red-500 hover:bg-red-600 text-white transition cursor-pointer"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </div>
 
-      {/* ================= MOBILE CARD VIEW ================= */}
-      <div className="lg:hidden space-y-4 mt-4">
-        {tasks.map((task) => (
-          <div
-            key={task._id}
-            className="border border-slate-200 dark:border-slate-800 rounded-xl p-4 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition"
-          >
-            <div className="flex items-center gap-3">
-              <img
-                src={task.task_image_url}
-                alt="task"
-                className="w-12 h-12 object-cover rounded-lg border"
-              />
-
-              <div className="flex-1">
-                <h2 className="font-semibold text-slate-800 dark:text-white truncate">
-                  {task.title}
-                </h2>
-
-                <p className="text-xs text-slate-500">
-                  Date: {task.completion_date}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex justify-between mt-3 text-sm">
-              <span className="text-indigo-600 font-medium">
-                Workers: {task.required_workers}
-              </span>
-
-              <span className="text-slate-600 dark:text-slate-300">
-                Pay: ${task.payable_amount}
-              </span>
-            </div>
-
-            <div className="mt-2 font-bold text-indigo-600">
-              Total: {task.required_workers * task.payable_amount}
-            </div>
-
-            <div className="flex gap-2 mt-3">
-              <button
-                onClick={() => handleEdit(task)}
-                className="flex-1 px-3 py-1 text-xs rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white transition"
-              >
-                Update
-              </button>
-
-              <button
-                onClick={() => handleDelete(task._id)}
-                className="flex-1 px-3 py-1 text-xs rounded-lg bg-red-500 hover:bg-red-600 text-white transition"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
-  )}
-</div>
-      
       {/* MODAL HERE */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">

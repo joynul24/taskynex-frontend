@@ -80,7 +80,7 @@ export default function WorkerHome() {
 
   // Stats calculation
   const totalSubmissions = submissions.length;
-  
+
   const pendingSubmissions = useMemo(
     () => submissions.filter((s) => s.status === "pending").length,
     [submissions]
@@ -174,9 +174,9 @@ export default function WorkerHome() {
 
       {/* STATS */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {stats.map((stat, i) => (
+        {(stats || []).map((stat, i) => (
           <motion.div
-            key={i}
+            key={stat.id || i}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
@@ -235,10 +235,10 @@ export default function WorkerHome() {
                   </td>
                 </tr>
               ) : (
-                approvedSubmissions.map((sub, i) => (
+                (approvedSubmissions || []).map((sub, i) => (
                   <tr
                     key={sub._id || i}
-                    className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition"
+                    className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
                   >
                     <td className="px-6 py-4 font-medium text-slate-900 dark:text-white">
                       {sub.task_title || "N/A"}
@@ -253,7 +253,7 @@ export default function WorkerHome() {
                     </td>
 
                     <td className="px-6 py-4">
-                      <span className="px-3 py-1 bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400 rounded-full text-xs font-bold">
+                      <span className="px-3 py-1 bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400 rounded-full text-xs font-bold border border-emerald-200 dark:border-emerald-900/30">
                         approved
                       </span>
                     </td>

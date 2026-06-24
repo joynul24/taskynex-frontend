@@ -56,63 +56,63 @@ export default function WorkerTaskList() {
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                        {
-                            tasks.map(task => (
+                        {(tasks || []).map(task => (
 
-                                <div
-                                    key={task._id}
-                                    className="bg-white rounded-xl shadow border p-5"
-                                >
+                            <div
+                                key={task._id}
+                                className="bg-white dark:bg-slate-900 rounded-xl shadow border border-slate-200 dark:border-slate-800 p-5 transition-colors"
+                            >
 
-                                    <img
-                                        src={task.task_image_url}
-                                        alt=""
-                                        className="w-full h-48 object-cover rounded-lg"
-                                    />
+                                <img
+                                    src={task.task_image_url}
+                                    alt=""
+                                    className="w-full h-48 object-cover rounded-lg"
+                                />
 
-                                    <h2 className="font-bold text-xl mt-4">
-                                        {task.task_title}
-                                    </h2>
+                                <h2 className="font-bold text-xl mt-4 text-slate-900 dark:text-white">
+                                    {task.task_title}
+                                </h2>
 
-                                    <p className="mt-2">
-                                        <span className="font-semibold">
-                                            Buyer :
-                                        </span>{" "}
-                                        {task.buyer_name}
-                                    </p>
+                                <p className="mt-2 text-slate-700 dark:text-slate-300">
+                                    <span className="font-semibold text-slate-900 dark:text-slate-200">
+                                        Buyer :
+                                    </span>{" "}
+                                    {task.buyer_name}
+                                </p>
 
-                                    <p>
-                                        <span className="font-semibold">
-                                            Completion :
-                                        </span>{" "}
-                                        {task.completion_date}
-                                    </p>
+                                <p className="text-slate-700 dark:text-slate-300">
+                                    <span className="font-semibold text-slate-900 dark:text-slate-200">
+                                        Completion :
+                                    </span>{" "}
+                                    {task.completion_date}
+                                </p>
 
-                                    <p>
-                                        <span className="font-semibold">
-                                            Pay :
-                                        </span>{" "}
+                                <p className="text-slate-700 dark:text-slate-300">
+                                    <span className="font-semibold text-slate-900 dark:text-slate-200">
+                                        Pay :
+                                    </span>{" "}
+                                    <span className="text-indigo-600 dark:text-indigo-400 font-bold">
                                         {task.payable_amount} Coins
-                                    </p>
+                                    </span>
+                                </p>
 
-                                    <p>
-                                        <span className="font-semibold">
-                                            Required Workers :
-                                        </span>{" "}
-                                        {task.required_workers}
-                                    </p>
+                                <p className="text-slate-700 dark:text-slate-300">
+                                    <span className="font-semibold text-slate-900 dark:text-slate-200">
+                                        Required Workers :
+                                    </span>{" "}
+                                    {task.required_workers}
+                                </p>
 
-                                    <Link
-                                        to={`/dashboard/task-details/${task._id}`}
-                                        className="btn btn-primary w-full mt-4"
-                                    >
-                                        View Details
-                                    </Link>
+                                <Link
+                                    to={`/dashboard/task-details/${task._id}`}
+                                    className="btn btn-primary w-full mt-4"
+                                >
+                                    View Details
+                                </Link>
 
-                                </div>
+                            </div>
 
-                            ))
-                        }
+                        ))}
 
                     </div>
 

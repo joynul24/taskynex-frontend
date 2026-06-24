@@ -120,9 +120,9 @@ export default function BuyerPurchaseCoin() {
 
       <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
 
-        {packages.map((pack, index) => (
+        {(packages || []).map((pack, index) => (
           <motion.div
-            key={pack.id}
+            key={pack.id || index}
             initial={{
               opacity: 0,
               y: 40,
@@ -185,7 +185,7 @@ export default function BuyerPurchaseCoin() {
             <button
               disabled={loading}
               onClick={() => handlePurchase(pack)}
-              className="mt-8 w-full bg-white text-slate-900 font-bold py-3 rounded-xl hover:scale-105 duration-300"
+              className="mt-8 w-full bg-white text-slate-900 font-bold py-3 rounded-xl hover:scale-105 duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {loading ? "Processing..." : "Purchase Now"}
             </button>

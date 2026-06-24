@@ -43,7 +43,7 @@ export default function AdminHome() {
         <title>Taskynex | Admin Dashboard</title>
       </Helmet>
       {/* Header Area */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden"
@@ -53,15 +53,15 @@ export default function AdminHome() {
 
         <div className="flex flex-col gap-2 relative z-10">
           <div className="flex items-center gap-3 mb-1">
-             <span className="px-3 py-1 bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-400 text-xs font-bold rounded-full uppercase tracking-wider">Super Admin</span>
-             <span className="flex items-center gap-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-               <motion.div animate={{ opacity: [1, 0.5, 1] }} transition={{ repeat: Infinity, duration: 2 }} className="w-2 h-2 rounded-full bg-emerald-500"></motion.div> System Online
-             </span>
+            <span className="px-3 py-1 bg-indigo-100 text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-400 text-xs font-bold rounded-full uppercase tracking-wider">Super Admin</span>
+            <span className="flex items-center gap-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+              <motion.div animate={{ opacity: [1, 0.5, 1] }} transition={{ repeat: Infinity, duration: 2 }} className="w-2 h-2 rounded-full bg-emerald-500"></motion.div> System Online
+            </span>
           </div>
           <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">Admin <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-cyan-500">Command Center</span></h1>
           <p className="text-slate-500 dark:text-slate-400 max-w-lg">Manage all platform activities, approve payouts, and oversee exponential growth metrics in real-time.</p>
         </div>
-        
+
         <div className="relative z-10 w-full md:w-auto">
           <div className="relative">
             <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -71,36 +71,36 @@ export default function AdminHome() {
       </motion.div>
 
       {/* Stats Cards */}
-      <motion.div 
+      <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="show"
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
       >
-        {stats.map((stat, i) => (
-          <motion.div 
+        {(stats || []).map((stat, i) => (
+          <motion.div
             variants={itemVariants}
             whileHover={{ y: -5, scale: 1.02 }}
-            key={i} 
+            key={stat.id || i}
             className={`bg-gradient-to-br ${stat.bg} border ${stat.border} p-6 rounded-3xl flex items-center justify-between shadow-sm relative overflow-hidden group cursor-default`}
           >
             <div className="absolute inset-0 bg-white/40 dark:bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="relative z-10">
               <p className="text-sm font-bold text-slate-600 dark:text-slate-300 mb-1 opacity-80">{stat.label}</p>
               <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
-                 {stat.value}
-                 {i === 3 && <FiTrendingUp size={16} className="text-emerald-500 animate-bounce" />}
+                {stat.value}
+                {i === 3 && <FiTrendingUp size={16} className="text-emerald-500 animate-bounce" />}
               </h3>
             </div>
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-white dark:bg-slate-800 shadow-md relative z-10`}>
-              {React.cloneElement(stat.icon, { size: 28 })}
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-white dark:bg-slate-800 shadow-md relative z-10">
+              {React.isValidElement(stat.icon) ? React.cloneElement(stat.icon, { size: 28 }) : null}
             </div>
           </motion.div>
         ))}
       </motion.div>
 
       {/* Withdrawal Requests Table */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.6 }}
@@ -110,7 +110,7 @@ export default function AdminHome() {
           <div className="absolute inset-0 bg-gradient-to-r from-slate-50 to-white dark:from-slate-900 dark:to-slate-800/50 pointer-events-none"></div>
           <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-3 relative z-10">
             <div className="p-2 bg-emerald-100 dark:bg-emerald-500/20 rounded-lg">
-               <FiDollarSign className="text-emerald-600 dark:text-emerald-400" />
+              <FiDollarSign className="text-emerald-600 dark:text-emerald-400" />
             </div>
             Pending Withdrawals
           </h2>
@@ -118,7 +118,7 @@ export default function AdminHome() {
             {withdrawals.length} Action Needed
           </span>
         </div>
-        
+
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[13px] font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-700">
@@ -131,24 +131,24 @@ export default function AdminHome() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 text-slate-700 dark:text-slate-300">
-              {withdrawals.map((req, idx) => (
-                <motion.tr 
+              {(withdrawals || []).map((req, idx) => (
+                <motion.tr
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5 + (idx * 0.1) }}
-                  key={req.id} 
+                  key={req.id || req._id || idx}
                   className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group"
                 >
                   <td className="px-6 py-5">
                     <div className="flex flex-col">
                       <span className="font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{req.name}</span>
-                      <span className="text-xs text-slate-500">{req.email}</span>
+                      <span className="text-xs text-slate-500 dark:text-slate-400">{req.email}</span>
                     </div>
                   </td>
                   <td className="px-6 py-5">
                     <div className="flex flex-col gap-1">
                       <span className="font-extrabold text-emerald-600 dark:text-emerald-400 text-lg leading-none">{req.amount}</span>
-                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{req.coins} Coins</span>
+                      <span className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">{req.coins} Coins</span>
                     </div>
                   </td>
                   <td className="px-6 py-5">
@@ -158,9 +158,9 @@ export default function AdminHome() {
                   </td>
                   <td className="px-6 py-5 font-medium text-sm text-slate-500 dark:text-slate-400">{req.date}</td>
                   <td className="px-6 py-5 text-right">
-                    <button 
-                      onClick={() => handleApprove(req.id)}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-emerald-500/20 transition-all hover:scale-105 active:scale-95"
+                    <button
+                      onClick={() => handleApprove(req.id || req._id)}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-emerald-500/20 transition-all hover:scale-105 active:scale-95 cursor-pointer"
                     >
                       <FiCheckCircle size={18} /> Approve
                     </button>

@@ -57,40 +57,41 @@ export default function WorkerSubmissions() {
 
           <tbody className="text-slate-900 dark:text-white">
 
-            {submissions.map((submission) => (
-
-              <tr key={submission._id}>
-
-                <td>{submission.task_title}</td>
-
-                <td>{submission.buyer_name}</td>
-
-                <td>{submission.payable_amount} Coins</td>
-
-                <td>
-                  {new Date(
-                    submission.current_date
-                  ).toLocaleDateString()}
+            {(submissions || []).map((submission) => (
+              <tr
+                key={submission._id}
+                className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+              >
+                <td className="p-3 text-slate-800 dark:text-slate-200 font-medium">
+                  {submission.task_title}
                 </td>
 
-                <td>
+                <td className="p-3 text-slate-600 dark:text-slate-300">
+                  {submission.buyer_name}
+                </td>
 
+                <td className="p-3 font-bold text-indigo-600 dark:text-indigo-400">
+                  {submission.payable_amount} Coins
+                </td>
+
+                <td className="p-3 text-slate-500 dark:text-slate-400 text-sm">
+                  {new Date(submission.current_date).toLocaleDateString()}
+                </td>
+
+                <td className="p-3">
                   <span
-                    className={`px-3 py-1 rounded-full text-white text-sm
-                    ${submission.status === "pending"
-                        ? "bg-yellow-500"
+                    className={`px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider
+        ${submission.status === "pending"
+                        ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-950/50 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-900"
                         : submission.status === "approved"
-                          ? "bg-green-600"
-                          : "bg-red-600"
+                          ? "bg-green-100 text-green-800 dark:bg-green-950/50 dark:text-green-400 border border-green-200 dark:border-green-900"
+                          : "bg-red-100 text-red-800 dark:bg-red-950/50 dark:text-red-400 border border-red-200 dark:border-red-900"
                       }`}
                   >
                     {submission.status}
                   </span>
-
                 </td>
-
               </tr>
-
             ))}
 
           </tbody>
