@@ -103,7 +103,7 @@ export default function BuyerHome() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto flex flex-col gap-6">
+    <div className="max-w-7xl mx-auto flex flex-col gap-6 text-slate-900 dark:text-slate-100">
 
       <Helmet>
         <title>Taskynex | Buyer Dashboard</title>
@@ -115,7 +115,7 @@ export default function BuyerHome() {
         animate={{ opacity: 1, y: 0 }}
         className="bg-white dark:bg-slate-900 p-6 rounded-3xl border"
       >
-        <h1 className="text-3xl font-black">Buyer Dashboard</h1>
+        <h1 className="text-3xl font-black text-slate-900 dark:text-white">Buyer Dashboard</h1>
       </motion.div>
 
       {/* ================= STATS ================= */}
@@ -137,7 +137,7 @@ export default function BuyerHome() {
       {/* ================= TABLE ================= */}
       <div className="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-2xl border overflow-x-auto">
 
-        <h2 className="text-xl font-bold mb-4">
+        <h2 className="text-xl font-bold mb-4 text-slate-900 dark:text-white">
           Tasks To Review
         </h2>
 
@@ -151,7 +151,7 @@ export default function BuyerHome() {
           <table className="w-full text-sm">
 
             <thead>
-              <tr className="bg-indigo-50 dark:bg-slate-800 text-indigo-700">
+              <tr className="bg-indigo-50 dark:bg-slate-800 text-indigo-700 dark:text-indigo-300">
                 <th className="p-3 text-left">Worker</th>
                 <th className="p-3 text-left">Task</th>
                 <th className="p-3 text-left">Pay</th>
@@ -167,15 +167,15 @@ export default function BuyerHome() {
                   className="border-b hover:bg-slate-50 dark:hover:bg-slate-800"
                 >
 
-                  <td className="p-3">
+                  <td className="p-3 text-slate-700 dark:text-slate-300">
                     {sub.worker_name || sub.worker_email}
                   </td>
 
-                  <td className="p-3">
+                  <td className="p-3 text-slate-700 dark:text-slate-300">
                     {sub.task_title}
                   </td>
 
-                  <td className="p-3 text-indigo-600 font-bold">
+                  <td className="p-3 text-indigo-600 dark:text-indigo-400 font-bold">
                     ${sub.payable_amount}
                   </td>
 
@@ -261,9 +261,9 @@ export default function BuyerHome() {
 // ================= STAT COMPONENT =================
 function Stat({ title, value }) {
   return (
-    <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border shadow-sm">
-      <p className="text-slate-500 text-sm">{title}</p>
-      <h2 className="text-2xl font-bold text-indigo-600">
+    <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+      <p className="text-slate-500 dark:text-slate-400 text-sm">{title}</p>
+      <h2 className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
         {value}
       </h2>
     </div>
