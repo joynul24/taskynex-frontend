@@ -350,18 +350,6 @@ export default function Home() {
       </section>
 
       {/* Extra Section 3: CTA */}
-      {/* <section className="py-20 px-6 mt-10 mb-20">
-        <div className="max-w-5xl mx-auto bg-gradient-to-tr from-indigo-600 to-purple-700 rounded-3xl p-10 md:p-16 text-center text-white relative overflow-hidden shadow-2xl shadow-indigo-500/20" data-aos="zoom-in-up">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-400/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
-
-          <h2 className="text-4xl md:text-5xl font-black mb-6 relative z-10">Ready to start earning?</h2>
-          <p className="text-lg text-indigo-100 mb-10 max-w-2xl mx-auto relative z-10">Join thousands of users completing tasks and earning coins right now. Sign up takes less than a minute.</p>
-          <Link to="/register" className="inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-700 hover:bg-slate-50 rounded-xl font-bold shadow-lg transition-transform hover:scale-105 relative z-10">
-            Create Free Account <FiChevronRight className="ml-2 w-5 h-5" />
-          </Link>
-        </div>
-      </section> */}
       <ReadyToEarn></ReadyToEarn>
     </div>
   );
